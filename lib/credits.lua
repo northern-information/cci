@@ -3,11 +3,13 @@ credits = {}
 function credits.init()
   local contributors = {
     "desolationjones",
+    "Doberman",
     "eigen",
     "infinitedigits",
     "juje",
     "Justmat",
     "Syntheist",
+    "Tyler",
     "tyleretters",
     "Ukasz"
   }
