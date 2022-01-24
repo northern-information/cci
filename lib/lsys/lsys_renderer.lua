@@ -10,7 +10,7 @@ function lsys_renderer.check_lsys_position()
   local left_edge = 5 
   local right_edge = 40
   local top_edge = 5
-  local bottom_edge = 50
+  local bottom_edge = 80
   local leftmost_point, rightmost_point, topmost_point, bottommost_point
   local turtle_positions = lsys_controller.get_turtle_positions()
   for j=1, #turtle_positions,1 do
@@ -41,14 +41,14 @@ function lsys_renderer.check_lsys_position()
     local plant_width = rightmost_point - leftmost_point
     local plant_height = bottommost_point - topmost_point
     -- print(plant_width, plant_height)
-    if plant_width > 40 or plant_height > 40 then
+    if plant_width > right_edge or plant_height > bottom_edge then
       lsys_renderer.redo = true
-      lsys_controller.set_node_length(0.7)
+      lsys_controller.set_node_length(0.9)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
-    if (plant_width < 10 and plant_height < 10) then
+    if (plant_width < right_edge - 5 and plant_height < bottom_edge - 5) then
       lsys_renderer.redo = true
-      lsys_controller.set_node_length(1.3)
+      lsys_controller.set_node_length(1.1)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
     if (leftmost_point < left_edge) then
@@ -78,8 +78,12 @@ end
 
 
 lsys_renderer.recheck_lsys_position = function()
+  screen.clear()
   clock.sync(1/15)
+  -- print("recheck")
   lsys_renderer.check_lsys_position()
+  -- lsys_controller.redraw()
+  
 end
 
 lsys_renderer.draw_lsys = function()

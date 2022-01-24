@@ -83,7 +83,6 @@ function turtle:new(s, l, th)
       if (c == 'F' or c == 'G' or c == 'f' ) then
         if t.temp == nil then
           t.temp = t.length
-          -- print("snl",t.length,t.temp)
         end
         position_start.x = t.start.x
         position_start.y = t.start.y
@@ -98,6 +97,7 @@ function turtle:new(s, l, th)
             table.remove(t.positions, i)
             table.insert(t.positions, i, vector:new(position_end.x,position_end.y))
             screen.move(position_end.x+1, position_end.y)
+            
             -- uncomment to draw a dot at each node point
             -- screen.circle(position_end.x, position_end.y,1)
           end

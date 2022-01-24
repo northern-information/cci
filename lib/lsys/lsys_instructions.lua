@@ -13,8 +13,20 @@ local lsys_instructions = {
     max_generations = 4,
     length = 5,
     angle = 25,
-    starting_generation = 4,
+    starting_generation = 3,
     initial_turtle_rotation = 90
+  },{
+    start_from = vector:new(68, 35), 
+    ruleset = {
+      {"X","+YF-XFX-FY+"},
+      {"Y","-XF+YFY+FX-"}
+    },
+    axiom = "X",
+    max_generations = 5,
+    length = 5,
+    angle = 90,
+    initial_turtle_rotation = 90,
+    starting_generation = 3
   }
 }
 

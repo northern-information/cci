@@ -17,7 +17,8 @@ end
 function items:register(t)
   local item = {}
   item["name"] = t.n
-  item["lsystem"] = t.l
+  item["lsystem_name"] = t.n
+  item["lsystem_id"] = t.l
   item["png"] = t.p
   item["rarity"] = t.r
   item["burden"] = t.b
@@ -27,7 +28,8 @@ function items:register(t)
 end
 
 function items:load_all()
-  self:register{n = "Staghorn Coral",        l = "staghorn",  p = nil,                       r = "M", t = "C",  b = 0,        d = "No description."}
+  self:register{n = "Staghorn Coral",        l = 1,  p = nil,                       r = "M", t = "C",  b = 0,        d = "No description."}
+  self:register{n = "Brain Coral",           l = 2,  p = nil,                       r = "M", t = "C",  b = 0,        d = "No description."}
   self:register{n = "Ceph",                  l = nil,          p = "ceph",                   r = "M", t = "C",  b = 0,        d = "No description."}
   self:register{n = "Floater",               l = nil,          p = "floater",                r = "C", t = "C",  b = 0,        d = "No description."}
   self:register{n = "Glass Eye",             l = nil,          p = "glass-eye",              r = "R", t = "C",  b = 0,        d = "No description."}

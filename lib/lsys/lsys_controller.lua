@@ -313,7 +313,6 @@ lsc.set_instructions = function(rotate_by, increment_generation_by)
 end 
 
 lsc.change_instructions = function(next_instruction, target_generation)
-  print("change_inst")
   lsc.setup(next_instruction, target_generation)
 end
 
