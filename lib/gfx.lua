@@ -12,7 +12,12 @@ function gfx:render()
   screen.clear()
   local i = items.all[items.selected]
   -- col 1
-  screen.display_png(gfx.png_prefix .. i.png .. ".png", 0, 0)
+  if i.png then 
+    screen.display_png(gfx.png_prefix .. i.png .. ".png", 0, 0) 
+  elseif i.lsystem then
+    lsys_controller.change_instructions(1, 3) 
+    lsys_renderer.draw_lsys()
+  end
   screen.level(15)
   screen.move(0, 56)
   screen.text("BUR: " .. i.burden)
