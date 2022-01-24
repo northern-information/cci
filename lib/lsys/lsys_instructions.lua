@@ -2,7 +2,7 @@ local lsys_instructions = {
   -- staghorn coral, from: https://samuelllsvensson.github.io/files/Procedurella_projekt.pdf,
   {
     name = "staghorn",
-    start_from = vector:new(45, 30),
+    start_from = vector:new(55, 30),
     ruleset = {
       {"A","[TF!A[+AF[FB][FB]]]"},
       {"B","[!FB][!FB]"}

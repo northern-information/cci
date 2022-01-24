@@ -15,7 +15,12 @@ function gfx:render()
   if i.png then 
     screen.display_png(gfx.png_prefix .. i.png .. ".png", 0, 0) 
   elseif i.lsystem then
-    lsys_controller.change_instructions(1, 3) 
+    local current_instructions = lsys_controller.get_current_instruction()
+    if gfx.loaded == nil then
+      gfx.loaded = 1
+      print(current_instructions, i.lsystem)
+      lsys_controller.change_instructions(1, 3) 
+    end
     lsys_renderer.draw_lsys()
   end
   screen.level(15)

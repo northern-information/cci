@@ -30,7 +30,6 @@ turtle.__index = turtle
 function turtle:new(s, l, th)
   local t = {}
   setmetatable(t, turtle)
-  
   t.todo = s
   t.length = l
   t.theta = th
@@ -82,6 +81,10 @@ function turtle:new(s, l, th)
       table.insert(t.positions, i, {})
   
       if (c == 'F' or c == 'G' or c == 'f' ) then
+        if t.temp == nil then
+          t.temp = t.length
+          -- print("snl",t.length,t.temp)
+        end
         position_start.x = t.start.x
         position_start.y = t.start.y
         position_end.x = t.start.x+t.length
@@ -107,14 +110,10 @@ function turtle:new(s, l, th)
         local check_polarity = string.sub(t.todo, i+1, i+1)
         if check_polarity == "_" then
           random_angle = tonumber(string.sub(t.todo, i+1, i+4))
-          -- print("randang neg",random_angle)
         else
           random_angle = tonumber(string.sub(t.todo, i+1, i+3))
-          -- print("randang pos",random_angle)
         end
         if random_angle then t.rotate(math.rad(random_angle)) end
-        -- string.sub(t.todo, i+1, i+1)
-        -- print("found !",string.sub(t.todo, i, i+30))
       elseif (c == '+') then
         t.rotate(t.theta)
       elseif (c == '-') then
@@ -150,14 +149,15 @@ function turtle:new(s, l, th)
   end
   
   t.change_length = function(min_length, pct)
+    
     local percent = pct and pct or 0.5
     t.length = t.length * percent > 1 and t.length * percent or 1
-      
+    
     -- make sure t.length is not less than min_length (if min_length is provided)
     -- print("change length",min_length, t.length )
-    -- if (min_length and t.length < min_length) then
+    if (min_length and t.length < min_length) then
       t.length = min_length
-    -- end
+    end
   end
   
   t.set_todo = function(s,gen)

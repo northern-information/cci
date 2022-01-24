@@ -107,7 +107,6 @@ local node_length
 
 -- set the node length by given percentage
 lsc.set_node_length = function(node_length_pct)
-  -- print("snl")
   lsc.turtle.change_length(turtle_min_length, node_length_pct)
 end
 
@@ -245,7 +244,6 @@ lsc.setup = function(instruction_number, target_generation)
   end
   lsc.current_instruction = instruction_number
   
-
   lsc.sentence = lsc.get_sentence()
   lsc.turtle = turtle_class:new(
     lsc.sentence, 
@@ -315,6 +313,7 @@ lsc.set_instructions = function(rotate_by, increment_generation_by)
 end 
 
 lsc.change_instructions = function(next_instruction, target_generation)
+  print("change_inst")
   lsc.setup(next_instruction, target_generation)
 end
 

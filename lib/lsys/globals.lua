@@ -46,7 +46,7 @@ lsys_screen_level = 3
 lsys = {}
 initializing = true
 RANDOM_ANGLE_MAX = 90
-turtle_min_length = 0.2
+turtle_min_length = 2
 
 
 -- for l_system.lua
