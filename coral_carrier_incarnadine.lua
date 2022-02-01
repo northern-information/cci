@@ -1,8 +1,10 @@
 -- CORAL CARRIER INCARNADINE
--- v0
+-- https://cci.dev
 --
 -- k2: previous
 -- k3: next
+
+v = "0.0.2"
 
 tabutil = require "tabutil"
 include "coral_carrier_incarnadine/lib/filesystem"
