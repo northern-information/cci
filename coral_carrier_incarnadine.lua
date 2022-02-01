@@ -9,12 +9,14 @@ include "coral_carrier_incarnadine/lib/filesystem"
 include "coral_carrier_incarnadine/lib/gfx"
 include "coral_carrier_incarnadine/lib/items"
 include "coral_carrier_incarnadine/lib/credits"
+include "coral_carrier_incarnadine/lib/lsys/includes"
 
 function init()
   filesystem.init()
   gfx.init()
   items.init()
   credits.init()
+  lsys_controller:init()
   screen_dirty = true
   redraw_clock_id = clock.run(redraw_clock)
 end

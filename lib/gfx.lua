@@ -11,8 +11,17 @@ end
 function gfx:render()
   screen.clear()
   local i = items.all[items.selected]
-  -- col 1
-  screen.display_png(gfx.png_prefix .. i.png .. ".png", 0, 0)
+  if i.png then 
+    screen.display_png(gfx.png_prefix .. i.png .. ".png", 0, 0) 
+  elseif i.lsystem_id then
+    local current_instructions = lsys_controller.get_current_instruction()
+    if gfx.last_lsys_loaded == nil or i.lsystem_id ~= gfx.last_lsys_loaded then
+      gfx.last_lsys_loaded  = i.lsystem_id
+      local start_gen = lsys_instructions[i.lsystem_id].starting_generation
+      lsys_controller.change_instructions(i.lsystem_id, start_gen) 
+    end
+    lsys_renderer.draw_lsys()
+  end
   screen.level(15)
   screen.move(0, 56)
   screen.text("BUR: " .. i.burden)
