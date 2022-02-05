@@ -25,7 +25,7 @@ function credits.init()
   print("PROUDLY PRESENTS...") print()
   print("~~~~~~~~~~~~~~~~~~~~~~~~~")
   print("CORAL CARRIER INCARNADINE") print()
-  print("v" .. v) print()
+  print("v" .. version) print()
   print("~~~~~~~~~~~~~")
   print("CONTRIBUTORS:") print()
   for k, v in pairs(contributors) do

@@ -4,14 +4,14 @@
 -- k2: previous
 -- k3: next
 
-v = "0.0.2"
+version = "0.0.3"
 
 tabutil = require "tabutil"
-include "coral_carrier_incarnadine/lib/filesystem"
-include "coral_carrier_incarnadine/lib/gfx"
-include "coral_carrier_incarnadine/lib/items"
-include "coral_carrier_incarnadine/lib/credits"
-include "coral_carrier_incarnadine/lib/lsys/includes"
+include "cci/lib/filesystem"
+include "cci/lib/gfx"
+include "cci/lib/items"
+include "cci/lib/credits"
+include "cci/lib/lsys/includes"
 
 function init()
   filesystem.init()
@@ -57,8 +57,4 @@ end
 
 function cleanup()
   clock.cancel(redraw_clock_id)
-end
-
-function r()
-  norns.script.load(norns.state.script)
 end
