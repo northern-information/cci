@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- 2d vector class
 -- based on: 
 --  processing: https://processing.org/reference/PVector.html

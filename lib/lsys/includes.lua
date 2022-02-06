@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- required and included files
 
 -- required for multiple files

@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 local lsys_renderer = {}
 
 lsys_renderer.redo_render = 0

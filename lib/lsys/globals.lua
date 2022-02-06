@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- global functions and variables 
 
 -------------------------------------------

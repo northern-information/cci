@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 local lsys_instructions = {
   -- staghorn coral, from: https://samuelllsvensson.github.io/files/Procedurella_projekt.pdf,
   {

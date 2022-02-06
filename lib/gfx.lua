@@ -1,7 +1,9 @@
+-- by @tyleretters
+
 gfx = {}
 
 function gfx.init()
-  gfx.png_prefix = "/home/we/dust/code/coral_carrier_incarnadine/png/"
+  gfx.png_prefix = "/home/we/dust/code/cci/png/"
   screen.aa(1)
   screen.font_face(1)
   screen.font_size(8)

@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- l-system execution and sound output
 
 ------------------------------

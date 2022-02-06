@@ -1,3 +1,5 @@
+-- by @tyleretters
+
 credits = {}
 
 function credits.init()

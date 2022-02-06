@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- matrix_stack
 -- from: https:--natureofcode.com/book/chapter-8-fractals/
 -- more or less replicates the processing language's matrix stack, see:

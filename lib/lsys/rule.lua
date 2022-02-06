@@ -1,3 +1,5 @@
+-- by @jaseknighter
+
 -- l-system rule class
 -- from: https:natureofcode.com/book/chapter-8-fractals/
 

@@ -1,3 +1,5 @@
+-- by @tyleretters
+
 items = {}
 
 function items.init()
