@@ -101,6 +101,8 @@ function credits:coda()
   self:divider()
   print("By the time development of this game is complete, most of our coral reefs could be dead.")
   print()
+  print("Donate to the Global Coral Reef Alliance today!")
   print()
+  print("https://www.globalcoral.org")
   print()
 end

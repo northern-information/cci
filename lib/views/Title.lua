@@ -1,8 +1,7 @@
 -- by @tyleretters
 
 Title = View:new{
-  name = "Main Menu",
-  selected = 1
+  name = "Main Menu"
 }
 
 Title:add_menu_item{

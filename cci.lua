@@ -1,7 +1,7 @@
 -- CORAL CARRIER INCARNADINE
 -- https://cci.dev
 
-version = "0.0.4"
+version = "0.0.6"
 
 tabutil = require "tabutil"
 include "cci/lib/credits"
@@ -11,28 +11,26 @@ include "cci/lib/graphics"
 include "cci/lib/hid_controller"
 include "cci/lib/items"
 include "cci/lib/lsys/includes"
+include "cci/lib/norns_controller"
+include "cci/lib/script"
 include "cci/lib/q"
 include "cci/lib/View"
 include "cci/lib/views/Title"
 
-
 function init()
   filesystem.init()
   hid_controller.init()
+  norns_controller.init()
   graphics.init()
   events.init()
   q.init()
   items.init()
   credits.init()
   lsys_controller:init()
-  -- boot.init()
   arrow_of_time = 0
-  credits:open()
-  q:push("items")
-  q:push("main_menu")
-  q:push("splash")
-  q:pop()
   redraw_clock_id = clock.run(redraw_clock)
+  credits:open()
+  script:act(1):scene(1):action()
 end
 
 function redraw()
@@ -52,7 +50,10 @@ function enc(e, d)
 end
 
 function key(k, z)
-  print(k, z)
+  if z == 0 then return end
+  if k == 2 then norns_controller:yes() end
+  if k == 3 then norns_controller:no() end
+  screen_dirty = true
 end
 
 function redraw_clock()

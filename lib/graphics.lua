@@ -16,14 +16,14 @@ function graphics:render()
   local q = q.current
   if q.name == "splash" then
     screen.clear()
-    screen.display_png(graphics.png_prefix .. "owl.png", 0, 0) 
+    screen.display_png(graphics.png_prefix .. "splash-owl.png", 0, 0) 
     screen.update()
     if arrow_of_time > 30 then
       q:pop()
     end
   elseif q.name == "main_menu" then
     screen.clear()
-    screen.display_png(graphics.png_prefix .. "cci.png", 0, 0)
+    screen.display_png(graphics.png_prefix .. "splash-cci.png", 0, 0)
     screen.move(128, 64)
     screen.level(1)
     screen.text_right("v" .. version)

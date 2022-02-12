@@ -29,3 +29,11 @@ end
 function View:get_selected()
   return self.selected
 end
+
+function View:move_selected()
+  print("mOvEd")
+end
+
+function View:trigger_selected()
+  print("tRigGerEd")
+end
