@@ -14,6 +14,16 @@ function hid_controller:handle_code(code, value)
   if code == "ENTER" then
     q:pop()
   end
+
+  if code == "DOWN" then
+    print("left off here")
+  end
+
+  if code == "UP" then
+    print("left off here")
+  end
+
+
   if code == "RIGHT" then
     items:next()
     screen_dirty = true

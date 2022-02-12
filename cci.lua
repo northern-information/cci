@@ -1,30 +1,33 @@
 -- CORAL CARRIER INCARNADINE
 -- https://cci.dev
---
--- language keyboard required
 
 version = "0.0.4"
 
 tabutil = require "tabutil"
-include "cci/lib/filesystem"
-include "cci/lib/hid_controller"
-include "cci/lib/gfx"
-include "cci/lib/events"
-include "cci/lib/q"
-include "cci/lib/items"
 include "cci/lib/credits"
+include "cci/lib/events"
+include "cci/lib/filesystem"
+include "cci/lib/graphics"
+include "cci/lib/hid_controller"
+include "cci/lib/items"
 include "cci/lib/lsys/includes"
+include "cci/lib/q"
+include "cci/lib/View"
+include "cci/lib/views/Title"
+
 
 function init()
   filesystem.init()
   hid_controller.init()
-  gfx.init()
+  graphics.init()
   events.init()
   q.init()
   items.init()
   credits.init()
   lsys_controller:init()
+  -- boot.init()
   arrow_of_time = 0
+  credits:open()
   q:push("items")
   q:push("main_menu")
   q:push("splash")
@@ -33,7 +36,7 @@ function init()
 end
 
 function redraw()
-  gfx:render()
+  graphics:render()
 end
 
 function keyboard.code(code, value)
@@ -67,5 +70,6 @@ function redraw_clock()
 end
 
 function cleanup()
+  credits:close()
   clock.cancel(redraw_clock_id)
 end

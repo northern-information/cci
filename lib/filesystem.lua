@@ -21,7 +21,7 @@ function filesystem:scandir(directory)
 end
 
 function filesystem:scan_pngs()
-  local scan = util.scandir("/home/we/dust/code/coral_carrier_incarnadine/png")
+  local scan = util.scandir("/home/we/dust/code/cci/png")
   for k, file in pairs(scan) do
     local name = string.gsub(file, "/", "")
     table.insert(self.pngs, name)
