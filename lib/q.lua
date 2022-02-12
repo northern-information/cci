@@ -1,5 +1,4 @@
 -- by @tyleretters
-
 -- queuing LIFO game event stack
 
 q = {}

@@ -1,5 +1,4 @@
 -- by @tyleretters
-
 -- game events registry
 
 events = {}
