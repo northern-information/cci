@@ -1,6 +1,6 @@
 -- CORAL CARRIER INCARNADINE
 -- https://cci.dev
--- testing hecatomb
+-- YARR!!!
 version = "0.0.6"
 
 tabutil = require "tabutil"
