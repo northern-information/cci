@@ -30,7 +30,7 @@ end
 
 function credits:divider()
   print()
-  print("# # # # # # # # # # # # # # # #")
+  print("# # # # # # # # # # # # # # # # # # # # # # # # ")
 end
 
 function credits:open()
@@ -42,7 +42,7 @@ function credits:open()
   print("CORAL CARRIER INCARNADINE")
   print("v" .. version)
   print()
-  print("         o.               O               O    ")
+  print("         o.               O               O     ")
   print("    O   .#@##  O     o   °#@##  O   #OOOO##@   #")
   print("   O.  O@@@@@OO°    O   #@@@@@OO°  @@@@@@@@@OoO°")
   print("  *° *O@*°#@@@o    o° *##*°@@@@*  o*°°°*°#@@@@* ")
