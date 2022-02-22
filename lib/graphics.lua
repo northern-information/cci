@@ -2,31 +2,54 @@
 
 graphics = {}
 
+
+function graphics:inventory()
+  local i = items.all[items.selected]
+  if i.png then 
+    screen.display_png(graphics.png_prefix .. i.png .. ".png", 0, 0) 
+  elseif i.lsystem_id then
+    local current_instructions = lsys_controller.get_current_instruction()
+    if graphics.last_lsys_loaded == nil or i.lsystem_id ~= graphics.last_lsys_loaded then
+      graphics.last_lsys_loaded  = i.lsystem_id
+      local start_gen = lsys_instructions[i.lsystem_id].starting_generation
+      lsys_controller.change_instructions(i.lsystem_id, start_gen) 
+    end
+    lsys_renderer.draw_lsys()
+  end
+  self:text(0, 56, "BUR: " .. i.burden, 15)
+  self:text(0, 64, "(" .. i.rarity .. "/" .. i.type .. ")", 15)
+  -- col 2
+  self:text(50, 5, i.name, 15)
+  self:rect(50, 7, 78, 1, 15)
+  -- todo, wordwrap function & scrolling
+  -- for now, shield ye eyes
+  self:text(50, 15, self:trim(string.sub(i.description, 1, 16)))
+  self:text(50, 23, self:trim(string.sub(i.description, 17, 32)))
+  self:text(50, 31, self:trim(string.sub(i.description, 33, 48)))
+  self:text(50, 39, self:trim(string.sub(i.description, 49, 64)))
+end
+
+
 function graphics.init()
-  graphics.arrow_of_time = 0
-  graphics.png_prefix = "/home/we/dust/code/cci/png/"
-  graphics.splash_lines_open = {}
-  graphics.splash_lines_close = {}
-  graphics.splash_lines_close_available = {}
-  graphics.duration_counter = 0
-  graphics.is_dynamic_duration = true
-  for i=1,45 do graphics.splash_lines_open[i] = i end
-  for i=1,64 do graphics.splash_lines_close_available[i] = i end
   screen.aa(0)
   screen.font_face(1)
   screen.font_size(8)
   screen.line_width(1)
   screen.ping()
+  graphics.png_prefix = "/home/we/dust/code/cci/png/"
+  graphics.arrow_of_time = 0
+  graphics.duration_counter = 0
+  graphics.is_dynamic_duration = true
+  -- title_northern_information
+  graphics.title_northern_information_splash_lines_open = {}
+  graphics.title_northern_information_splash_lines_close = {}
+  graphics.title_northern_information_splash_lines_close_available = {}
+  for i=1, 45 do graphics.title_northern_information_splash_lines_open[i] = i end
+  for i=1, 64 do graphics.title_northern_information_splash_lines_close_available[i] = i end
 end
 
 function graphics:render()
-  local c = queue.current.name
-      if c == "northern_information"                            then self:northern_information()
-  elseif c == "title_and"                                       then self:title_and()
-  elseif c == "applied_sciences_and_phantasms_working_division" then self:applied_sciences_and_phantasms_working_division()  
-  elseif c == "title_proudly_present"                           then self:title_proudly_present()
-  elseif c == "main_menu"                                       then self:main_menu()
-  end
+  queue.current.render()
   self:decrement_duration_counter()
   if self.duration_counter < 0 and not self.is_dynamic_duration then
     queue:pop()
@@ -54,12 +77,11 @@ function graphics:title_and()
   fn.set_screen_dirty(true)
 end
 
-function graphics:applied_sciences_and_phantasms_working_division()
-  self:png(-24, 0, "splash-owl")
-  self:text(84, 8,  "THE", 15)
-  self:text(84, 16, "APPLIED", 15)
-  self:text(84, 24, "SCIENCES", 15)
-  self:text(84, 32, "AND", 15)
+function graphics:title_owl()
+  self:png(-24, 0,  "splash-owl")
+  self:text(84, 16, "THE", 15)
+  self:text(84, 24, "APPLIED", 15)
+  self:text(84, 32, "SCIENCES &", 15)
   self:text(84, 40, "PHANTASMS", 15)
   self:text(84, 48, "WORKING", 15)
   self:text(84, 56, "DIVISION", 15)
@@ -71,60 +93,26 @@ function graphics:title_proudly_present()
   fn.set_screen_dirty(true)
 end
 
-function graphics:main_menu()
+function graphics:title()
   self:png(0, 0, "splash-cci")
   self:text(0, 64, "v" .. version, 1)  
   self:text_right(128, 64, cci.hash, 1)
-  self:text_center(64, 40, "> NEW GAME <", 15)
-  self:text_center(64, 48, "EXIT", 1)
+  local y = 40
+  for k, option in pairs(controller.menu) do
+    local name, level = "", 1
+    if option.id == controller.selected then
+      name = "> " .. option.name .. " <"
+      level = 15
+    else
+      name =  option.name
+      level = 1
+    end
+    self:text_center(64, y, name, level)
+    y = y + 8
+  end
 end
 
-function graphics:png(x, y, filename_no_extension)
-  screen.display_png(self.png_prefix .. filename_no_extension .. ".png", x, y)
-end
-
--- function graphics:items()
---   local i = items.all[items.selected]
---   if i.png then 
---     screen.display_png(graphics.png_prefix .. i.png .. ".png", 0, 0) 
---   elseif i.lsystem_id then
---     local current_instructions = lsys_controller.get_current_instruction()
---     if graphics.last_lsys_loaded == nil or i.lsystem_id ~= graphics.last_lsys_loaded then
---       graphics.last_lsys_loaded  = i.lsystem_id
---       local start_gen = lsys_instructions[i.lsystem_id].starting_generation
---       lsys_controller.change_instructions(i.lsystem_id, start_gen) 
---     end
---     lsys_renderer.draw_lsys()
---   end
---   screen.level(15)
---   screen.move(0, 56)
---   screen.text("BUR: " .. i.burden)
---   screen.move(0, 64)
---   screen.text("(" .. i.rarity .. "/" .. i.type .. ")")
---   -- col 2
---   screen.move(50, 5)
---   screen.text(i.name)
---   screen.rect(50, 7, 78, 1)
---   screen.fill()
---   -- todo, wordwrap function & scrolling
---   -- for now, shield ye eyes
---   screen.move(50, 15)
---   screen.text(self:trim(string.sub(i.description, 1, 16)))
---   screen.move(50, 23)
---   screen.text(self:trim(string.sub(i.description, 17, 32)))
---   screen.move(50, 31)
---   screen.text(self:trim(string.sub(i.description, 33, 48)))
---   screen.move(50, 39)
---   screen.text(self:trim(string.sub(i.description, 49, 64)))
--- end
-
--- function graphics:trim(s)
---   return s:match"^%s*(.*)"
--- end
-
-
-
-function graphics:northern_information()
+function graphics:title_northern_information()
   local col_x = 34
   local row_x = 34
   local y = 45
@@ -135,11 +123,11 @@ function graphics:northern_information()
 
   self:ni(col_x, row_x, y, l)
 
-  if #self.splash_lines_open > 1 then 
-    local delete = math.random(1, #self.splash_lines_open)
-    table.remove(self.splash_lines_open, delete)
-    for i = 1, #self.splash_lines_open do
-      self:mlrs(1, self.splash_lines_open[i] + 4, 128, 1, 0)
+  if #self.title_northern_information_splash_lines_open > 1 then 
+    local delete = math.random(1, #self.title_northern_information_splash_lines_open)
+    table.remove(self.title_northern_information_splash_lines_open, delete)
+    for i = 1, #self.title_northern_information_splash_lines_open do
+      self:mlrs(1, self.title_northern_information_splash_lines_open[i] + 4, 128, 1, 0)
     end
   end
 
@@ -148,17 +136,17 @@ function graphics:northern_information()
   end
 
   if fn.get_arrow_of_time() > 100 then
-    if #self.splash_lines_close_available > 0 then 
-      local add = math.random(1, #self.splash_lines_close_available)
-      table.insert(self.splash_lines_close, self.splash_lines_close_available[add])
-      table.remove(self.splash_lines_close_available, add)
+    if #self.title_northern_information_splash_lines_close_available > 0 then 
+      local add = math.random(1, #self.title_northern_information_splash_lines_close_available)
+      table.insert(self.title_northern_information_splash_lines_close, self.title_northern_information_splash_lines_close_available[add])
+      table.remove(self.title_northern_information_splash_lines_close_available, add)
     end
-    for i = 1, #self.splash_lines_close do
-      self:mlrs(1, self.splash_lines_close[i], 128, 1, 0)
+    for i = 1, #self.title_northern_information_splash_lines_close do
+      self:mlrs(1, self.title_northern_information_splash_lines_close[i], 128, 1, 0)
     end
   end
 
-  if #self.splash_lines_close_available == 0 then
+  if #self.title_northern_information_splash_lines_close_available == 0 then
     queue:pop()
   end
 
@@ -198,6 +186,10 @@ function graphics:n_row_bottom(x, y, l)
   self:mls(x+21, y-39, x+29, y-39, l)
   self:mls(x+20, y-38, x+28, y-38, l)
   self:mls(x+20, y-37, x+28, y-37, l)
+end
+
+function graphics:png(x, y, filename_no_extension)
+  screen.display_png(self.png_prefix .. filename_no_extension .. ".png", x, y)
 end
 
 function graphics:mlrs(x1, y1, x2, y2, l)
@@ -242,4 +234,8 @@ function graphics:text_center(x, y, s, l)
   screen.level(l or 15)
   screen.move(x, y)
   screen.text_center(s)
+end
+
+function graphics:trim(s)
+  return s:match"^%s*(.*)"
 end

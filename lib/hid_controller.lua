@@ -3,7 +3,7 @@
 hid_controller = {}
 
 function hid_controller.init()
-  hid_controller.logging = true
+  hid_controller.logging = false
 end
 
 function hid_controller:handle_code(code, value)
@@ -12,30 +12,27 @@ function hid_controller:handle_code(code, value)
   end
   if value == 0 then return end
   if code == "ENTER" then
-    q:pop()
+    controller:enter()
   end
   if code == "DOWN" then
-    print("left off here")
+    controller:down()
   end
   if code == "UP" then
-    print("left off here")
+    controller:up()
   end
   if code == "RIGHT" then
-    items:next()
-    screen_dirty = true
+    controller:right()
   end
   if code == "LEFT" then
-    items:previous()
-    screen_dirty = true
+    controller:left()
   end
   if code == "ESC" then
-    _menu.set_mode(true)
-    norns.script.clear()
+    controller:esc()
   end
 end
 
 function hid_controller:handle_char(ch)
-  if hid.controller.logging then
+  if hid_controller.logging then
     print(ch)
   end
 end

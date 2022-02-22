@@ -5,14 +5,16 @@ queue = {}
 
 function queue.init()
   queue.logging = true
+  queue:clear()
+end
+
+function queue:clear()
   queue.stack = {}
   queue.current = {
     name = "init",
     duration = 0,
     action = function() return end,
   }
-  queue.endframe = 0
-  queue.hold = false
 end
 
 function queue:push(name)
@@ -26,7 +28,15 @@ function queue:push(name)
   end
 end
 
+function queue:jump(name)
+  self:clear()
+  self:push(name)
+  self:pop()
+end
+
 function queue:pop()
+  -- trigger the on_leave action for the current event
+  self.stack[#self.stack].on_leave()
   if #self.stack > 0 then
     if self.logging then
       print("popping: " .. self.stack[#self.stack].name)
@@ -39,15 +49,15 @@ function queue:pop()
       graphics:set_duration_counter(self.current.duration)
       graphics:set_dynamic_duration(false)
     end
+    self.current.on_arrive()
+    self.current.action()
     self.stack[#self.stack] = nil
     fn.set_screen_dirty(true)
   end
 end
 
 function queue:list()
-  print("queue.current")
   tabutil.print(self.current)
-  print("queue.stack")
   for k, v in pairs(self.stack) do
     print(k)
     tabutil.print(v)

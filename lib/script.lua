@@ -9,11 +9,11 @@ end
 
 function script:action()
   if self.act == 0 and self.scene == 0 then
-    queue:push("main_menu")
-    queue:push("title_proudly_present")
-    queue:push("applied_sciences_and_phantasms_working_division")
-    queue:push("title_and")
-    queue:push("northern_information")
+    queue:push("title")
+    -- queue:push("title_proudly_present")
+    -- queue:push("title_owl")
+    -- queue:push("title_and")
+    -- queue:push("title_northern_information")
   end
   queue:pop()
 end
