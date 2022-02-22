@@ -87,8 +87,9 @@ end
 function graphics:title()
   self:png(0, 0, "splash-cci")
 
-  local lsys_scale = 0.95
   
+  --setup lsys coral #1
+  local lsys_scale = 0.95
   local x_offset1 = -40
   local y_offset1 = 0
   local lsys_start_gen1 = lsys1.instr[1].starting_generation
