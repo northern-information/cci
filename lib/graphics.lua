@@ -87,19 +87,21 @@ end
 function graphics:title()
   self:png(0, 0, "splash-cci")
 
-  -- intention was for this to be on the "left side" of CCI
-  local current_instructions = lsys_controller.get_current_instruction()
-  local start_gen = lsys_instructions[1].starting_generation
-  -- i added this method but it doesn't seem to be working, follows CSS "TRBL" top/right/bottom/left format:
-  lsys_renderer.set_edges(0, 24, 58, 0)  
-  lsys_controller.change_instructions(1, start_gen) 
-  lsys_renderer.draw_lsys()
-  -- intention was for this to be on the "right side" of CCI
-  -- local current_instructions = lsys_controller.get_current_instruction()
-  -- local start_gen = lsys_instructions[1].starting_generation
-  -- lsys_renderer.set_edges(0, 128, 58, 104)  
-  -- lsys_controller.change_instructions(2, start_gen) 
-  -- lsys_renderer.draw_lsys()
+  local lsys_scale = 0.95
+  
+  local x_offset1 = -40
+  local y_offset1 = 0
+  local lsys_start_gen1 = lsys1.instr[1].starting_generation
+  lsys1.setup(1, lsys_start_gen1, x_offset1, y_offset1, lsys_scale) 
+  
+  
+  --setup lsys coral #2
+  local x_offset2 = 60
+  local y_offset2 = 0
+  local lsys_start_gen2 = lsys1.instr[1].starting_generation
+  lsys2.setup(1, lsys_start_gen2, x_offset2, y_offset2, lsys_scale) 
+  
+  clock.run(graphics.draw_lsys)
 
   self:text(0, 64, "v" .. version, 1)  
   self:text_right(128, 64, cci.hash, 1)
@@ -116,6 +118,12 @@ function graphics:title()
     self:text_center(64, y, name, level)
     y = y + 8
   end
+end
+
+function graphics.draw_lsys()
+  clock.sleep(0.1)
+  lsys1.redraw()
+  lsys2.redraw()
 end
 
 function graphics:title_northern_information()
