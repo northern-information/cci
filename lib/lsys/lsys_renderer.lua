@@ -3,16 +3,27 @@
 local lsys_renderer = {}
 
 lsys_renderer.redo_render = 0
+lsys_renderer.top_edge = 5
+lsys_renderer.right_edge = 40
+lsys_renderer.bottom_edge = 80
+lsys_renderer.left_edge = 5 
+
+
+
+function lsys_renderer.set_edges(t, r, b, l)
+  lsys_renderer.top_edge = t
+  lsys_renderer.right_edge = r
+  lsys_renderer.bottom_edge = b
+  lsys_renderer.left_edge = l
+end
+
 function lsys_renderer.check_lsys_position()
   lsys_renderer.redo = false
   lsys_renderer.redo_render = lsys_renderer.redo_render + 1
   if lsys_renderer.redo_render > 3 then 
     return 
   end
-  local left_edge = 5 
-  local right_edge = 40
-  local top_edge = 5
-  local bottom_edge = 80
+
   local leftmost_point, rightmost_point, topmost_point, bottommost_point
   local turtle_positions = lsys_controller.get_turtle_positions()
   for j=1, #turtle_positions,1 do
@@ -43,34 +54,34 @@ function lsys_renderer.check_lsys_position()
     local plant_width = rightmost_point - leftmost_point
     local plant_height = bottommost_point - topmost_point
     -- print(plant_width, plant_height)
-    if plant_width > right_edge or plant_height > bottom_edge then
+    if plant_width > lsys_renderer.right_edge or plant_height > lsys_renderer.bottom_edge then
       lsys_renderer.redo = true
       lsys_controller.set_node_length(0.9)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
-    if (plant_width < right_edge - 5 and plant_height < bottom_edge - 5) then
+    if (plant_width < lsys_renderer.right_edge - 5 and plant_height < lsys_renderer.bottom_edge - 5) then
       lsys_renderer.redo = true
       lsys_controller.set_node_length(1.1)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
-    if (leftmost_point < left_edge) then
+    if (leftmost_point < lsys_renderer.left_edge) then
       lsys_renderer.redo = true
       lsys_controller.set_offset(1, 0)
       clock.run(lsys_renderer.recheck_lsys_position)
     end 
     
-    if topmost_point < top_edge  then
+    if topmost_point < lsys_renderer.top_edge  then
       lsys_renderer.redo = true
       lsys_controller.set_offset(0, 1)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
     
-    if rightmost_point > right_edge then
+    if rightmost_point > lsys_renderer.right_edge then
       lsys_renderer.redo = true
       lsys_controller.set_offset(-1, 0)
       clock.run(lsys_renderer.recheck_lsys_position)
     end
-    if bottommost_point > bottom_edge then
+    if bottommost_point > lsys_renderer.bottom_edge then
       lsys_renderer.redo = true
       lsys_controller.set_offset(0, -1)
       clock.run(lsys_renderer.recheck_lsys_position)

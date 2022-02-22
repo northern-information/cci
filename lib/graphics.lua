@@ -4,21 +4,12 @@ graphics = {}
 
 
 function graphics:inventory()
+  self:rect(0, 0, 48, 48, 15)
+  self:rect(1, 1, 46, 46, 0)
   local i = items.all[items.selected]
-  if i.png then 
-    screen.display_png(graphics.png_prefix .. i.png .. ".png", 0, 0) 
-  elseif i.lsystem_id then
-    local current_instructions = lsys_controller.get_current_instruction()
-    if graphics.last_lsys_loaded == nil or i.lsystem_id ~= graphics.last_lsys_loaded then
-      graphics.last_lsys_loaded  = i.lsystem_id
-      local start_gen = lsys_instructions[i.lsystem_id].starting_generation
-      lsys_controller.change_instructions(i.lsystem_id, start_gen) 
-    end
-    lsys_renderer.draw_lsys()
-  end
+  screen.display_png(graphics.png_prefix .. i.png .. ".png", 2, 2) 
   self:text(0, 56, "BUR: " .. i.burden, 15)
   self:text(0, 64, "(" .. i.rarity .. "/" .. i.type .. ")", 15)
-  -- col 2
   self:text(50, 5, i.name, 15)
   self:rect(50, 7, 78, 1, 15)
   -- todo, wordwrap function & scrolling
@@ -95,6 +86,21 @@ end
 
 function graphics:title()
   self:png(0, 0, "splash-cci")
+
+  -- intention was for this to be on the "left side" of CCI
+  local current_instructions = lsys_controller.get_current_instruction()
+  local start_gen = lsys_instructions[1].starting_generation
+  -- i added this method but it doesn't seem to be working, follows CSS "TRBL" top/right/bottom/left format:
+  lsys_renderer.set_edges(0, 24, 58, 0)  
+  lsys_controller.change_instructions(1, start_gen) 
+  lsys_renderer.draw_lsys()
+  -- intention was for this to be on the "right side" of CCI
+  -- local current_instructions = lsys_controller.get_current_instruction()
+  -- local start_gen = lsys_instructions[1].starting_generation
+  -- lsys_renderer.set_edges(0, 128, 58, 104)  
+  -- lsys_controller.change_instructions(2, start_gen) 
+  -- lsys_renderer.draw_lsys()
+
   self:text(0, 64, "v" .. version, 1)  
   self:text_right(128, 64, cci.hash, 1)
   local y = 40
