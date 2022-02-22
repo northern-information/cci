@@ -8,12 +8,14 @@ function script.init()
 end
 
 function script:action()
-  -- this will evolve with scene two
-  -- "mvp"
-  q:push("items")
-  q:push("main_menu")
-  q:push("splash")
-  q:pop()
+  if self.act == 0 and self.scene == 0 then
+    queue:push("main_menu")
+    queue:push("title_proudly_present")
+    queue:push("applied_sciences_and_phantasms_working_division")
+    queue:push("title_and")
+    queue:push("northern_information")
+  end
+  queue:pop()
 end
 
 function script:act(i)
