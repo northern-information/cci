@@ -21,7 +21,7 @@
 --    r: randomly increase or decrease angle by one degree
 ------------------------------
 
-local matrix_stack = include("flora/lib/matrix_stack") 
+local matrix_stack = include("cci/lib/lsys/matrix_stack") 
 
 local turtle = {}
 turtle.__index = turtle
