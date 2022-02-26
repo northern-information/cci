@@ -1,5 +1,5 @@
 -- ANSI/ISO Keyboard Required
--- HECATOMB Mod Recommended testing1
+-- HECATOMB Mod Recommended
 -- https://cci.dev
 
 version = "0.0.8"
