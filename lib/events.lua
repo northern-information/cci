@@ -36,6 +36,18 @@ end
 function events:load_all()
 
   self:register{
+    name = "new_game",
+    duration = 0, 
+    on_arrive = function() return end,
+    on_leave = function() return end,
+    action = function() return end,
+    render = function()
+      graphics:enter_name()
+    end
+  }
+
+
+  self:register{
     name = "title",
     duration = 0, 
     on_arrive = function()
@@ -50,7 +62,10 @@ function events:load_all()
       controller:add_menu_item{
         id = 1,
         name = "NEW GAME",
-        action = function() queue:jump("new_game") end,
+        action = function()
+          queue:jump("loading")
+          -- queue:push("new_game")
+        end,
         change = function() return end
       }
       controller:add_menu_item{
@@ -71,6 +86,7 @@ function events:load_all()
     end
   }
 
+  self:register{name = "loading",                     duration = 20, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:loading() end }
   self:register{name = "title_northern_information",  duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_northern_information() end }
   self:register{name = "title_and",                   duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_and() end }
   self:register{name = "title_owl",                   duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_owl() end }

@@ -60,6 +60,8 @@ function controller:left()
 end
 
 function controller:esc()
-  print("esc")
+  queue:clear()
+  queue:jump("title")
+  self:select(1)
   fn.set_screen_dirty(true)
 end

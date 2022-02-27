@@ -20,6 +20,14 @@ function graphics:inventory()
   self:text(50, 39, self:trim(string.sub(i.description, 49, 64)))
 end
 
+function graphics:loading()
+  self:text_right(128, 64, "LOADING...", 15)
+end
+
+function graphics:enter_name()
+  self:text_center(64, 8, "WHAT IS YOUR NAME?", 15)
+end
+
 
 function graphics.init()
   screen.aa(0)
