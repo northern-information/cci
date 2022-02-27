@@ -36,13 +36,13 @@ function controller:enter()
 end
 
 function controller:down()
-  self.selected = util.wrap(self.selected - 1, 1, #self.menu)
+  self.selected = util.wrap(self.selected + 1, 1, #self.menu)
   self:change()
   fn.set_screen_dirty(true)
 end
 
 function controller:up()
-  self.selected = util.wrap(self.selected + 1, 1, #self.menu)
+  self.selected = util.wrap(self.selected - 1, 1, #self.menu)
   self:change()
   fn.set_screen_dirty(true)
 end

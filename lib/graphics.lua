@@ -87,8 +87,8 @@ end
 
 function graphics:title()
   self:png(0, 0, "splash-cci")
-  self:draw_lsys(math.random(-40, -30), math.random(0, 10), 1, 1)
-  self:draw_lsys(math.random(50, 60), math.random(0, 10), 1, 1)
+  self:draw_lsys(-40, 0, 1, 1)
+  self:draw_lsys(50, 0, 1, 1)
   self:text(0, 64, "v" .. version, 1)  
   self:text_right(128, 64, cci.hash, 1)
   local y = 40
@@ -112,7 +112,6 @@ function graphics:draw_lsys(x_offset, y_offset, lsys_scale, level)
   lsys.setup(1, lsys.instr[1].starting_generation, x_offset, y_offset, lsys_scale, level) 
   lsys.redraw()
 end
-
 
 function graphics:title_northern_information()
   local col_x = 34

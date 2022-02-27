@@ -49,15 +49,21 @@ function events:load_all()
       controller:clear_menu()
       controller:add_menu_item{
         id = 1,
-        name = "VIEW ITEMS",
-        action = function() queue:jump("view_items") end,
-        change = function() print("change") end
+        name = "NEW GAME",
+        action = function() queue:jump("new_game") end,
+        change = function() return end
       }
       controller:add_menu_item{
         id = 2,
+        name = "VIEW ITEMS",
+        action = function() queue:jump("view_items") end,
+        change = function() return end
+      }
+      controller:add_menu_item{
+        id = 3,
         name = "EXIT",
         action = function() queue:jump("exit") end,
-        change = function() print("change") end
+        change = function() return end
       } 
     end,
     render = function()
