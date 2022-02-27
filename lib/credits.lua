@@ -16,6 +16,7 @@ function credits.init()
     "jatwo",
     "juje",
     "Justmat",
+    "license",
     "Obakegaku",
     "pleco",
     "radioedit",

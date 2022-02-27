@@ -2,6 +2,23 @@
 
 graphics = {}
 
+function graphics.init()
+  screen.aa(0)
+  screen.font_face(1)
+  screen.font_size(8)
+  screen.line_width(1)
+  screen.ping()
+  graphics.png_prefix = cci.absolute_path .. "/png/"
+  graphics.arrow_of_time = 0
+  graphics.duration_counter = 0
+  graphics.is_dynamic_duration = true
+  -- title_northern_information
+  graphics.title_northern_information_splash_lines_open = {}
+  graphics.title_northern_information_splash_lines_close = {}
+  graphics.title_northern_information_splash_lines_close_available = {}
+  for i=1, 45 do graphics.title_northern_information_splash_lines_open[i] = i end
+  for i=1, 64 do graphics.title_northern_information_splash_lines_close_available[i] = i end
+end
 
 function graphics:inventory()
   self:rect(0, 0, 48, 48, 15)
@@ -21,30 +38,12 @@ function graphics:inventory()
 end
 
 function graphics:loading()
-  self:text_right(128, 64, "LOADING...", 15)
+  self:text(0, 8, "ESC", 1)
+  self:text_right(128, 64, "NOTHING ON RADAR...", 15)
 end
 
 function graphics:enter_name()
   self:text_center(64, 8, "WHAT IS YOUR NAME?", 15)
-end
-
-
-function graphics.init()
-  screen.aa(0)
-  screen.font_face(1)
-  screen.font_size(8)
-  screen.line_width(1)
-  screen.ping()
-  graphics.png_prefix = "/home/we/dust/code/cci/png/"
-  graphics.arrow_of_time = 0
-  graphics.duration_counter = 0
-  graphics.is_dynamic_duration = true
-  -- title_northern_information
-  graphics.title_northern_information_splash_lines_open = {}
-  graphics.title_northern_information_splash_lines_close = {}
-  graphics.title_northern_information_splash_lines_close_available = {}
-  for i=1, 45 do graphics.title_northern_information_splash_lines_open[i] = i end
-  for i=1, 64 do graphics.title_northern_information_splash_lines_close_available[i] = i end
 end
 
 function graphics:render()
@@ -72,18 +71,17 @@ function graphics:set_duration_counter(i)
 end
 
 function graphics:title_and()
-  self:text_center(64, 32, "AND", 15)
+  self:text_center(64, 32, "AND THE POLYMYTHIC", 15)
   fn.set_screen_dirty(true)
 end
 
 function graphics:title_owl()
   self:png(-24, 0,  "splash-owl")
-  self:text(84, 16, "THE", 15)
-  self:text(84, 24, "APPLIED", 15)
-  self:text(84, 32, "SCIENCES &", 15)
-  self:text(84, 40, "PHANTASMS", 15)
-  self:text(84, 48, "WORKING", 15)
-  self:text(84, 56, "DIVISION", 15)
+  self:text(84, 16, "APPLIED", 15)
+  self:text(84, 24, "SCIENCES &", 15)
+  self:text(84, 32, "PHANTASMS", 15)
+  self:text(84, 40, "WORKING", 15)
+  self:text(84, 48, "DIVISION", 15)
   fn.set_screen_dirty(true)
 end
 
@@ -141,7 +139,7 @@ function graphics:title_northern_information()
   end
 
   if fn.get_arrow_of_time() >= 49 then
-    self:text_center(64, 60, "NORTHERN INFORMATION")
+    self:text_center(64, 60, "NORTHERN INFORMATION, LLC")
   end
 
   if fn.get_arrow_of_time() > 100 then

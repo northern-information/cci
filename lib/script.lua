@@ -3,12 +3,13 @@
 script = {}
 
 function script.init()
-  script.act = 0
-  script.scene = 0
+  script.a = 0 -- act
+  script.s = 0 -- scene
 end
 
 function script:action()
-  if self.act == 0 and self.scene == 0 then
+  if self.a == 0 and self.s == 0 then
+    score:loop("music-title")
     queue:push("title")
     queue:push("title_proudly_present")
     queue:push("title_owl")
@@ -19,11 +20,11 @@ function script:action()
 end
 
 function script:act(i)
-  self.act = i
+  self.a = i
   return self
 end
 
 function script:scene(i)
-  self.scene = i
+  self.s = i
   return self
 end
