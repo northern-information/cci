@@ -56,11 +56,6 @@ function keyboard.code(code, value)
   fn.break_splash()
 end
 
-function keyboard.char(ch)
-  hid_controller:handle_char(ch)
-  fn.break_splash()
-end
-
 function enc(e, d)
   fn.break_splash()
 end

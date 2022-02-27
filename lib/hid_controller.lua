@@ -30,9 +30,3 @@ function hid_controller:handle_code(code, value)
     controller:esc()
   end
 end
-
-function hid_controller:handle_char(ch)
-  if hid_controller.logging then
-    print(ch)
-  end
-end
