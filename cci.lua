@@ -28,13 +28,7 @@ function init()
   queue.init()
   items.init()
   credits.init()
-  lsys1 = lsys_controller:new()
-  lsys2 = lsys_controller:new()
-  lsys1:init()
-  lsys2:init()
-  local handle = io.popen("cd /home/we/dust/code/cci && git rev-parse --short HEAD")
-  cci.hash = string.gsub(handle:read("*a"), "%s+", "")
-  handle:close()
+  cci.hash = fn.get_hash()
   cci.arrow_of_time = 0
   cci.is_splash_break = false
   cci.is_screen_dirty = true

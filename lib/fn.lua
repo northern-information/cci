@@ -43,6 +43,13 @@ function fn.break_splash()
   end
 end
 
+function fn.get_hash()
+  local handle = io.popen("cd /home/we/dust/code/cci && git rev-parse --short HEAD")
+  local hash = string.gsub(handle:read("*a"), "%s+", "")
+  handle:close()
+  return hash
+end
+
 function fn.exit()
   _menu.set_mode(true)
   norns.script.clear()

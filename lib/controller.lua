@@ -12,6 +12,7 @@ function controller:add_menu_item(t)
   self.menu[t.id].id = t.id
   self.menu[t.id].name = t.name
   self.menu[t.id].action = t.action
+  self.menu[t.id].change = t.change
 end
 
 function controller:clear_menu()
@@ -19,8 +20,13 @@ function controller:clear_menu()
   fn.set_screen_dirty(true)
 end
 
+function controller:change()
+  self.menu[self.selected].change()
+end
+
 function controller:select(i)
   self.selected = i
+  self:change()
   fn.set_screen_dirty(true)
 end
 
@@ -31,11 +37,13 @@ end
 
 function controller:down()
   self.selected = util.wrap(self.selected - 1, 1, #self.menu)
+  self:change()
   fn.set_screen_dirty(true)
 end
 
 function controller:up()
   self.selected = util.wrap(self.selected + 1, 1, #self.menu)
+  self:change()
   fn.set_screen_dirty(true)
 end
 

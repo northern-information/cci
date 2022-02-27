@@ -206,10 +206,11 @@ function lsys_controller:new()
     return lsc.current_generation
   end
   
-  lsc.setup = function(instruction_number, target_generation, x_offset, y_offset, scale)
+  lsc.setup = function(instruction_number, target_generation, x_offset, y_offset, scale, level)
     initializing = true
     lsc.initializing = true
     lsc.current_generation = 0
+    lsc.level = level
     
     scale = scale or 1
 
@@ -317,11 +318,11 @@ function lsys_controller:new()
   lsc.clip_offset = 0
   
   lsc.redraw = function ()
+    screen.level(lsc.level)
     lsc.turtle.rotate(0, true)
     lsc.turtle.translate(lsc.start_from.x + lsc.offset.x, lsc.start_from.y + lsc.offset.y)
     lsc.turtle.rotate(math.rad(lsc.initial_turtle_rotation))
     lsc.turtle_data = lsc.turtle.render(true)
-    screen.update()
     if (lsc.turtle_data) then
       render_percentage_completed = lsc.turtle_data.render_percentage_completed
     end

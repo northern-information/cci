@@ -84,26 +84,11 @@ function graphics:title_proudly_present()
   fn.set_screen_dirty(true)
 end
 
+
 function graphics:title()
   self:png(0, 0, "splash-cci")
-
-  
-  --setup lsys coral #1
-  local lsys_scale = 0.95
-  local x_offset1 = -40
-  local y_offset1 = 0
-  local lsys_start_gen1 = lsys1.instr[1].starting_generation
-  lsys1.setup(1, lsys_start_gen1, x_offset1, y_offset1, lsys_scale) 
-  
-  
-  --setup lsys coral #2
-  local x_offset2 = 60
-  local y_offset2 = 0
-  local lsys_start_gen2 = lsys1.instr[1].starting_generation
-  lsys2.setup(1, lsys_start_gen2, x_offset2, y_offset2, lsys_scale) 
-  
-  clock.run(graphics.draw_lsys)
-
+  self:draw_lsys(math.random(-40, -30), math.random(0, 10), 1, 1)
+  self:draw_lsys(math.random(50, 60), math.random(0, 10), 1, 1)
   self:text(0, 64, "v" .. version, 1)  
   self:text_right(128, 64, cci.hash, 1)
   local y = 40
@@ -121,11 +106,13 @@ function graphics:title()
   end
 end
 
-function graphics.draw_lsys()
-  clock.sleep(0.1)
-  lsys1.redraw()
-  lsys2.redraw()
+function graphics:draw_lsys(x_offset, y_offset, lsys_scale, level)
+  local lsys = lsys_controller:new()
+  lsys:init()
+  lsys.setup(1, lsys.instr[1].starting_generation, x_offset, y_offset, lsys_scale, level) 
+  lsys.redraw()
 end
+
 
 function graphics:title_northern_information()
   local col_x = 34
