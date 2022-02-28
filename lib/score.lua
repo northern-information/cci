@@ -9,7 +9,7 @@ end
 
 function score:loop(file)
   local path = filesystem.wav_path .. "/" .. file .. ".wav"
-  local amp = 1
+  local amp = .25
   local amp_lag = 5
   local sample_start = 0
   local sample_end = 1

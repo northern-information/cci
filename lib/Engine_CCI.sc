@@ -45,8 +45,8 @@ Engine_CCI : CroneEngine {
           doneAction:2,
         );
 
-        // multiple by amp and attenuate
-        snd = snd * amp / 20 ;
+        // multiple by amp
+        snd = snd * amp;
 
         // if looping, free up synth if no output
         DetectSilence.ar(snd,doneAction:2);
@@ -80,8 +80,8 @@ Engine_CCI : CroneEngine {
 
         snd = Pan2.ar(snd,0);
 
-        // multiple by amp and attenuate
-        snd = snd * amp / 20;
+        // multiple by amp
+        snd = snd * amp;
 
         // if looping, free up synth if no output
         DetectSilence.ar(snd,doneAction:2);
