@@ -27,7 +27,7 @@ function Sampler:linear_fade_out(fname,fade)
 end
 
 function Sampler:linear_fade_in(fname,fade)
-  engine.sample_play(fname,fade,0)
+  engine.sample_play(fname,fade,1)
 end
 
 function Sampler:play_oneshot(fname)
