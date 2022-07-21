@@ -35,5 +35,23 @@ function Sampler:play_oneshot(fname)
   engine.sample_play(fname,fade,0)
 end
 
+function Sampler:test()
+  clock.run(function()
+    fname="/home/we/dust/audio/tehn/drumev.wav"
+    self:play_loop(fname)
+    clock.sleep(1)
+    self:set_sample_volume(fname,-12)
+    clock.sleep(1)
+    self:set_sample_volume(fname,-3)
+    clock.sleep(3)
+    self:linear_fade_out(fname,3)
+    clock.sleep(3)
+    self:linear_fade_in(fname,3)
+    clock.sleep(3)
+    self:linear_fade_out(fname,1)
+    clock.sleep(1)
+    self:play_oneshot(fname)
+  end)
+end
 
 return Sampler

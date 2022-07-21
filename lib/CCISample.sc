@@ -68,9 +68,10 @@ CCISample {
 		["play",id].postln;
 		if (bufs.at(id).notNil,{
 			var pars=[\buf,id,\fade,fade,\loop,loop];
-			syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,
-
-			).onFree({["freed"+id].postln}));
+			params.at(id).keysValuesDo({ arg pk,pv; 
+				pars=pars++[pk,pv];
+			});
+			syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,pars).onFree({["freed"+id].postln}));
 			NodeWatcher.register(syns.at(id));
 		},{
 			Buffer.read(server,id,action:{arg buf;
@@ -87,6 +88,7 @@ CCISample {
 
 	set {
 		arg id,key,val;
+		["set",id,key,val].postln;
 		if (params.at(id).isNil,{
 			params.put(id,Dictionary.new());
 		});

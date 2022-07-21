@@ -17,15 +17,14 @@ Engine_CCI : CroneEngine {
     // <CCI> 
     cciSample=CCISample(context.server,0);
 
-    this.addCommand("sample_play","sfff", { arg msg;
+    this.addCommand("sample_play","sff", { arg msg;
       var filename=msg[1];
-      var amp=msg[2];
-      var fade=msg[3];
-      var loop=msg[4];
-      cciSample.play(filename,amp,fade,loop);
+      var fade=msg[2];
+      var loop=msg[3];
+      cciSample.play(filename,fade,loop);
     });
 
-    this.addCommand("sample_stop","sff", { arg msg;
+    this.addCommand("sample_stop","sf", { arg msg;
       var filename=msg[1];
       var fade=msg[2];
       cciSample.stop(filename,fade);
@@ -35,7 +34,7 @@ Engine_CCI : CroneEngine {
       var filename=msg[1];
       var key=msg[2];
       var value=msg[3];
-      cciSample.stop(filename,key,value);
+      cciSample.set(filename,key,value);
     });
     // </CCI> 
 
