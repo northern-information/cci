@@ -64,22 +64,21 @@ CCISample {
 
 	play {
 		arg id,fade,loop;
-		this.stop(id,0.2);
-		["play",id].postln;
-		if (bufs.at(id).notNil,{
-			var pars=[\buf,id,\fade,fade,\loop,loop];
+		var pars=[\buf,id,\fade,fade,\loop,loop];
+		if (params.at(id).notNil,{
 			params.at(id).keysValuesDo({ arg pk,pv; 
 				pars=pars++[pk,pv];
 			});
+		});
+		this.stop(id,0.2);
+		["play",id].postln;
+		if (bufs.at(id).notNil,{
 			syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,pars).onFree({["freed"+id].postln}));
 			NodeWatcher.register(syns.at(id));
 		},{
 			Buffer.read(server,id,action:{arg buf;
 				bufs.put(id,buf);
-				params.put(id,Dictionary.new());
-				syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,
-					[\buf,id,\fade,fade,\loop,loop]
-				).onFree({["freed"+id].postln}));
+				syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,pars).onFree({["freed"+id].postln}));
 				NodeWatcher.register(syns.at(id));
 			});
 		});
