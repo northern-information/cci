@@ -11,6 +11,7 @@ function credits.init()
     "Doberman",
     "eigen",
     "Gahlord",
+    "Helen_G",
     "infinitedigits",
     "jaseknighter",
     "jatwo",

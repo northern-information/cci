@@ -19,6 +19,10 @@ include "cci/lib/queue"
 include "cci/lib/score"
 include "cci/lib/script"
 
+sampler = include "cci/lib/sampler"
+-- sampler:linear_fade_in("/home/we/dust/code/cci/wav/music-title.wav", 2)
+sampler:test()
+
 cci = {}
 
 function init()
