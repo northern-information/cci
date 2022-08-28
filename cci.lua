@@ -2,14 +2,13 @@
 -- HECATOMB Mod Recommended
 -- https://cci.dev
 
-version = "0.0.9"
+version = "0.0.10"
 engine.name = "CCI"
 tabutil = require "tabutil"
 include "cci/lib/controller"
 include "cci/lib/credits"
 include "cci/lib/events"
 include "cci/lib/filesystem"
-include "cci/lib/foley"
 include "cci/lib/fn"
 include "cci/lib/graphics"
 include "cci/lib/hid_controller"
@@ -21,7 +20,7 @@ include "cci/lib/script"
 
 sampler = include "cci/lib/sampler"
 -- sampler:linear_fade_in("/home/we/dust/code/cci/wav/music-title.wav", 2)
-sampler:test()
+-- sampler:test()
 
 cci = {}
 
@@ -35,7 +34,6 @@ function init()
   credits.init()
   events.init()
   filesystem.init()
-  foley.init()
   graphics.init()
   hid_controller.init()
   items.init()
@@ -65,6 +63,12 @@ function enc(e, d)
 end
 
 function key(k, z)
+  if k == 2 then
+    sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
+  end
+  if k == 3 then
+    sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
+  end
   fn.break_splash()
 end
 

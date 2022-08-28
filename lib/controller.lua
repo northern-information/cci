@@ -31,41 +31,39 @@ function controller:select(i)
 end
 
 function controller:enter()
-  foley:play("ui-yes")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-yes.wav")
   self.menu[self.selected].action()
   fn.set_screen_dirty(true)
 end
 
 function controller:down()
-  foley:play("ui-down")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
   self.selected = util.wrap(self.selected + 1, 1, #self.menu)
   self:change()
   fn.set_screen_dirty(true)
 end
 
 function controller:up()
-  foley:play("ui-up")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
   self.selected = util.wrap(self.selected - 1, 1, #self.menu)
   self:change()
   fn.set_screen_dirty(true)
 end
 
 function controller:right()
-  -- temporary
-  foley:play("ui-up")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
   items:next()
   fn.set_screen_dirty(true)
 end
 
 function controller:left()
-  -- temporary
-  foley:play("ui-down")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
   items:previous()
   fn.set_screen_dirty(true)
 end
 
 function controller:esc()
-  foley:play("ui-no")
+  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-no.wav")
   queue:clear()
   queue:jump("title")
   self:select(1)
