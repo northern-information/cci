@@ -64,7 +64,7 @@ CCISample {
 
 	play {
 		arg id,fade,loop;
-		var pars=[\buf,id,\fade,fade,\loop,loop];
+		var pars=[\fade,fade,\loop,loop];
 		if (params.at(id).notNil,{
 			params.at(id).keysValuesDo({ arg pk,pv; 
 				pars=pars++[pk,pv];
@@ -73,11 +73,13 @@ CCISample {
 		this.stop(id,0.2);
 		["play",id].postln;
 		if (bufs.at(id).notNil,{
+			pars=pars++[\buf,bufs.at(id)];
 			syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,pars).onFree({["freed"+id].postln}));
 			NodeWatcher.register(syns.at(id));
 		},{
 			Buffer.read(server,id,action:{arg buf;
 				bufs.put(id,buf);
+				pars=pars++[\buf,buf];
 				syns.put(id,Synth.new("defPlay"++bufs.at(id).numChannels,pars).onFree({["freed"+id].postln}));
 				NodeWatcher.register(syns.at(id));
 			});
