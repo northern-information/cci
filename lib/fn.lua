@@ -51,7 +51,7 @@ function fn.get_hash()
 end
 
 function fn.exit()
-  sampler:linear_fade_out_current()
+  clock.cancel(cci.redraw_clock_id)
   _menu.set_mode(true)
   norns.script.clear()
 end

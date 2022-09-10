@@ -1,6 +1,8 @@
+-- 0x002: MAIDéNFALL...
+-- 0x000: SALVAGé MODé éNABLé
+-- 0x032: éncs offline kéys null
 -- ANSI/ISO Keyboard Required
 -- See: System > Devices > HID
---
 -- HECATOMB Mod Recommended
 --
 -- https://cci.dev
@@ -9,6 +11,8 @@ cci = {}
 cci.version = "0.0.10"
 engine.name = "CCI"
 tabutil = require "tabutil"
+params:set("compressor", 1)
+params:set("reverb", 1)
 include "cci/lib/controller"
 include "cci/lib/credits"
 include "cci/lib/events"
@@ -20,7 +24,6 @@ include "cci/lib/items"
 include "cci/lib/lsys/includes"
 include "cci/lib/queue"
 include "cci/lib/sampler"
-include "cci/lib/score"
 include "cci/lib/script"
 include "cci/lib/uref"
 
@@ -38,7 +41,6 @@ function init()
   hid_controller.init()
   items.init()
   queue.init()
-  score.init()
   script.init()
   uref.init()
   cci.hash = fn.get_hash()

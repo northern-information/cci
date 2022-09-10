@@ -106,6 +106,12 @@ function graphics:set_duration_counter(i)
   self.duration_counter = i
 end
 
+function graphics:title_card()
+  self:text_center(64, 32, "CORAL CARRIER INCARNADINE", 15)
+  self:text_center(64, 40, "v" .. cci.version .. " (" .. cci.hash .. ")", 15)
+  fn.set_screen_dirty(true)
+end
+
 function graphics:title_and()
   self:text_center(64, 32, "AND THE POLYMYTHIC", 15)
   fn.set_screen_dirty(true)

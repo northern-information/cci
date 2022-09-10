@@ -94,7 +94,7 @@ function uref.page(i)
   end
   uref.lines = {}
   uref.scroll = 0
-  word_wrap(uref.root .. uref.files[uref.index])
+  uref.word_wrap(uref.root .. uref.files[uref.index])
 end
 
 function uref.scroll_page(d)

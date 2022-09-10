@@ -29,10 +29,6 @@ function sampler:linear_fade_out(fname, fade)
   engine.sample_stop(cci.absolute_path .. "/wav/" .. fname, fade)
 end
 
-function sampler:linear_fade_out_current()
-  engine.sample_stop(sampler.current_loop)
-end
-
 function sampler:linear_fade_in(fname, fade)
   sampler.current_loop = fname
   engine.sample_play(cci.absolute_path .. "/wav/" .. fname, fade, 1)

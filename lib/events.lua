@@ -39,7 +39,6 @@ function events:load_all()
     name = "title",
     duration = 0, 
     on_arrive = function()
-      sampler:linear_fade_in(cci.absolute_path .. "/wav/music-title.wav", 2)
       print("arrive title")
       cci.is_spash_break = true
     end,
@@ -74,13 +73,14 @@ function events:load_all()
     end
   }
 
-  self:register{name = "loading",                     duration = 20, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:loading() end }
+  self:register{name = "loading",                     duration = 20, action = function() return end,    change = function() return end, on_arrive = function() sampler:linear_fade_in("/music-title.wav", 2) return end, on_leave = function() return end, render = function() graphics:loading() end }
   self:register{name = "title_northern_information",  duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_northern_information() end }
   self:register{name = "title_and",                   duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_and() end }
   self:register{name = "title_owl",                   duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_owl() end }
   self:register{name = "title_proudly_present",       duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_proudly_present() end }
+  self:register{name = "title_card",                  duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_card() end }
   self:register{name = "items",                       duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:inventory() return end }
   self:register{name = "sift",                        duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:sift() return end }
-  self:register{name = "exit",                        duration = 0,  action = function() fn.exit() end, change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() return end }
+  self:register{name = "exit",                        duration = 0,  action = function() fn.exit() end, change = function() return end, on_arrive = function() sampler:linear_fade_out("/music-title.wav", 2) end, on_leave = function() return end, render = function() return end }
 
 end

@@ -9,8 +9,9 @@ end
 
 function script:action()
   if self.a == 0 and self.s == 0 then
-    score:loop("music-title")
+    sampler:linear_fade_in("/music-title.wav", 2)
     queue:push("title")
+    queue:push("title_card")
     queue:push("title_proudly_present")
     queue:push("title_owl")
     queue:push("title_and")
