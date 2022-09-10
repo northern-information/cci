@@ -1,8 +1,12 @@
 -- ANSI/ISO Keyboard Required
+-- See: System > Devices > HID
+--
 -- HECATOMB Mod Recommended
+--
 -- https://cci.dev
 
-version = "0.0.10"
+cci = {}
+cci.version = "0.0.10"
 engine.name = "CCI"
 tabutil = require "tabutil"
 include "cci/lib/controller"
@@ -15,14 +19,10 @@ include "cci/lib/hid_controller"
 include "cci/lib/items"
 include "cci/lib/lsys/includes"
 include "cci/lib/queue"
+include "cci/lib/sampler"
 include "cci/lib/score"
 include "cci/lib/script"
-
-sampler = include "cci/lib/sampler"
--- sampler:linear_fade_in("/home/we/dust/code/cci/wav/music-title.wav", 2)
--- sampler:test()
-
-cci = {}
+include "cci/lib/uref"
 
 function init()
   cci.absolute_path = "/home/we/dust/code/cci"
@@ -40,6 +40,7 @@ function init()
   queue.init()
   score.init()
   script.init()
+  uref.init()
   cci.hash = fn.get_hash()
   cci.redraw_clock_id = clock.run(fn.redraw_clock)
   credits:open()
@@ -59,16 +60,13 @@ function keyboard.code(code, value)
 end
 
 function enc(e, d)
+  print("Encoders not operational.")
   fn.break_splash()
 end
 
 function key(k, z)
-  if k == 2 then
-    sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
-  end
-  if k == 3 then
-    sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
-  end
+  if z == 0 then return end
+  print("Keys not operational.")
   fn.break_splash()
 end
 

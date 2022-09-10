@@ -51,6 +51,7 @@ function fn.get_hash()
 end
 
 function fn.exit()
+  sampler:linear_fade_out_current()
   _menu.set_mode(true)
   norns.script.clear()
 end

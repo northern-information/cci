@@ -20,7 +20,47 @@ function graphics.init()
   for i=1, 64 do graphics.title_northern_information_splash_lines_close_available[i] = i end
 end
 
+-- todo: refactor to use the ni graphic lib
+function graphics:sift()
+  screen.aa(1)
+  local percentage = (uref.scroll * -1) / uref.scroll_max
+  local scroll_y = (percentage * 64) + 1
+  local end_y = uref.scroll_max + (uref.padding * 2)
+  -- scrollbar
+  if scroll_y < (uref.scroll + end_y) then
+    screen.level(4)
+    screen.rect(127, scroll_y, 1, 3)
+    screen.fill()
+  end
+  -- filename
+  screen.level(15)
+  screen.rect(0, uref.scroll, 128, uref.line_height + 1)
+  screen.fill()
+  screen.level(0)
+  screen.pixel(0, uref.scroll)
+  screen.pixel(127, uref.scroll)
+  screen.move(2, (uref.line_height + uref.scroll) - 2)
+  screen.text(uref.files[uref.index])
+  screen.fill()
+  -- contents
+  screen.level(15)
+  for i, line in ipairs(uref.lines) do
+    screen.move(0, (i * uref.line_height) + uref.scroll + uref.padding)
+    screen.text(line)
+  end
+  -- end indicator
+  screen.level(15)
+  screen.rect(0, uref.scroll + end_y, 128, uref.line_height + 1)
+  screen.fill()
+  screen.level(0)
+  screen.pixel(0, uref.scroll + uref.line_height + end_y)
+  screen.pixel(127, uref.scroll + uref.line_height + end_y)
+  screen.move(2, (uref.line_height + uref.scroll + end_y) - 2)
+  screen.fill()
+end
+
 function graphics:inventory()
+  screen.aa(0)
   self:rect(0, 0, 48, 48, 15)
   self:rect(1, 1, 46, 46, 0)
   local i = items.all[items.selected]
@@ -40,10 +80,6 @@ end
 function graphics:loading()
   self:text(0, 8, "ESC", 1)
   self:text_right(128, 64, "NOTHING ON RADAR...", 15)
-end
-
-function graphics:enter_name()
-  self:text_center(64, 8, "WHAT IS YOUR NAME?", 15)
 end
 
 function graphics:render()
@@ -90,12 +126,12 @@ function graphics:title_proudly_present()
   fn.set_screen_dirty(true)
 end
 
-
 function graphics:title()
+  screen.aa(0)
   self:png(0, 0, "splash-cci")
   self:draw_lsys(-40, 0, 1, 1)
   self:draw_lsys(50, 0, 1, 1)
-  self:text(0, 64, "v" .. version, 1)  
+  self:text(0, 64, "v" .. cci.version, 1)  
   self:text_right(128, 64, cci.hash, 1)
   local y = 40
   for k, option in pairs(controller.menu) do

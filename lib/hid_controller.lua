@@ -11,6 +11,15 @@ function hid_controller:handle_code(code, value)
     print(code, value)
   end
 
+  -- act on keydown and keyup
+  if code == "RIGHTSHIFT" then
+    controller:shift(value)
+  end
+  if code == "LEFTSHIFT" then
+    controller:shift(value)
+  end
+
+  -- only act on keydown
   if value == 0 then return end
   
   if code == "ENTER" then

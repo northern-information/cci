@@ -5,6 +5,7 @@ controller = {}
 function controller.init()
   controller.menu = {}
   controller.selected = 1
+  controller.is_shifted = false
 end
 
 function controller:add_menu_item(t)
@@ -31,39 +32,93 @@ function controller:select(i)
 end
 
 function controller:enter()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-yes.wav")
-  self.menu[self.selected].action()
+  if queue.current.name == "title" then
+    sampler:play_oneshot("ui-yes.wav")
+    self.menu[self.selected].action()
+  end
+  if queue.current.name == "sift" then
+    sampler:play_oneshot("ui-no.wav")
+  end
+  if queue.current.name == "items" then
+    sampler:play_oneshot("ui-no.wav")
+  end
   fn.set_screen_dirty(true)
 end
 
 function controller:down()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
-  self.selected = util.wrap(self.selected + 1, 1, #self.menu)
-  self:change()
+  if queue.current.name == "title" then
+    sampler:play_oneshot("ui-down.wav")
+    self.selected = util.wrap(self.selected + 1, 1, #self.menu)
+    self:change()
+  end
+  if queue.current.name == "sift" then
+    sampler:play_oneshot("ui-up.wav")
+    local distance = controller.is_shifted and 24 or 4
+    uref.scroll_page(distance)
+  end
+  if queue.current.name == "items" then
+    sampler:play_oneshot("ui-no.wav")
+  end
   fn.set_screen_dirty(true)
 end
 
 function controller:up()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
-  self.selected = util.wrap(self.selected - 1, 1, #self.menu)
-  self:change()
+  if queue.current.name == "title" then
+    sampler:play_oneshot("ui-up.wav")
+    self.selected = util.wrap(self.selected - 1, 1, #self.menu)
+    self:change()
+  end
+  if queue.current.name == "sift" then
+    sampler:play_oneshot("ui-up.wav")
+    local distance = controller.is_shifted and -24 or -4
+    uref.scroll_page(distance)
+  end
+  if queue.current.name == "items" then
+    sampler:play_oneshot("ui-no.wav")
+  end
   fn.set_screen_dirty(true)
 end
 
 function controller:right()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-up.wav")
-  items:next()
+  if queue.current.name == "title" then
+    sampler:play_oneshot("ui-no.wav")
+  end
+  if queue.current.name == "sift" then
+    sampler:play_oneshot("ui-yes.wav")
+    uref.page(1)
+  end
+  if queue.current.name == "items" then
+    sampler:play_oneshot("ui-up.wav")
+    items:next()
+  end
   fn.set_screen_dirty(true)
 end
 
 function controller:left()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-down.wav")
-  items:previous()
+  if queue.current.name == "title" then
+    sampler:play_oneshot("ui-no.wav")
+  end
+  if queue.current.name == "sift" then
+    sampler:play_oneshot("ui-yes.wav")
+    uref.page(-1)
+  end
+  if queue.current.name == "items" then
+    sampler:play_oneshot("ui-down.wav")
+    items:previous()
+  end
   fn.set_screen_dirty(true)
 end
 
+function controller:shift(value)
+  if value == 0 then
+    controller.is_shifted = false
+  else
+    controller.is_shifted = true
+  end
+end
+
 function controller:esc()
-  sampler:play_oneshot(cci.absolute_path .. "/wav/ui-no.wav")
+  sampler:play_oneshot("ui-no.wav")
   queue:clear()
   queue:jump("title")
   self:select(1)

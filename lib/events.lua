@@ -36,21 +36,10 @@ end
 function events:load_all()
 
   self:register{
-    name = "new_game",
-    duration = 0, 
-    on_arrive = function() return end,
-    on_leave = function() return end,
-    action = function() return end,
-    render = function()
-      graphics:enter_name()
-    end
-  }
-
-
-  self:register{
     name = "title",
     duration = 0, 
     on_arrive = function()
+      sampler:linear_fade_in(cci.absolute_path .. "/wav/music-title.wav", 2)
       print("arrive title")
       cci.is_spash_break = true
     end,
@@ -61,17 +50,16 @@ function events:load_all()
       controller:clear_menu()
       controller:add_menu_item{
         id = 1,
-        name = "NEW GAME",
+        name = "SIFT",
         action = function()
-          queue:jump("loading")
-          -- queue:push("new_game")
+          queue:jump("sift")
         end,
         change = function() return end
       }
       controller:add_menu_item{
         id = 2,
-        name = "VIEW ITEMS",
-        action = function() queue:jump("view_items") end,
+        name = "ITEMS",
+        action = function() queue:jump("items") end,
         change = function() return end
       }
       controller:add_menu_item{
@@ -91,7 +79,8 @@ function events:load_all()
   self:register{name = "title_and",                   duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_and() end }
   self:register{name = "title_owl",                   duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_owl() end }
   self:register{name = "title_proudly_present",       duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_proudly_present() end }
-  self:register{name = "view_items",                  duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:inventory() return end }
+  self:register{name = "items",                       duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:inventory() return end }
+  self:register{name = "sift",                        duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:sift() return end }
   self:register{name = "exit",                        duration = 0,  action = function() fn.exit() end, change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() return end }
 
 end

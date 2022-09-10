@@ -1,39 +1,46 @@
 -- by @scholtz & @tyleretters
 
-local sampler = {}
+sampler = {}
 
 function sampler:new(o)
   o = o or {}
   setmetatable(o, self)
   self.__index = self
+  o.current_loop = ''
   return o
 end
 
 function sampler:set_sample_volume(fname, db)
-  engine.sample_set(fname, "db", db)
+  engine.sample_set(cci.absolute_path .. "/wav/" .. fname, "db", db)
 end
 
 function sampler:play_loop(fname)
+  sampler.current_loop = fname
   local fade = 0.005
-  engine.sample_play(fname, fade, 1)
+  engine.sample_play(cci.absolute_path .. "/wav/" .. fname, fade, 1)
 end
 
 function sampler:stop_loop(fname)
   local fade = 0.005
-  engine.sample_stop(fname, fade)
+  engine.sample_stop(cci.absolute_path .. "/wav/" .. fname, fade)
 end
 
 function sampler:linear_fade_out(fname, fade)
-  engine.sample_stop(fname, fade)
+  engine.sample_stop(cci.absolute_path .. "/wav/" .. fname, fade)
+end
+
+function sampler:linear_fade_out_current()
+  engine.sample_stop(sampler.current_loop)
 end
 
 function sampler:linear_fade_in(fname, fade)
-  engine.sample_play(fname, fade, 1)
+  sampler.current_loop = fname
+  engine.sample_play(cci.absolute_path .. "/wav/" .. fname, fade, 1)
 end
 
 function sampler:play_oneshot(fname)
   local fade = 0.005
-  engine.sample_play(fname, fade, 0)
+  engine.sample_play(cci.absolute_path .. "/wav/" .. fname, fade, 0)
 end
 
 function sampler:test()
@@ -57,5 +64,3 @@ function sampler:test()
     self:play_oneshot(fname)
   end)
 end
-
-return sampler
