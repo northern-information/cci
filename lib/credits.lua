@@ -11,7 +11,8 @@ function credits.init()
     "Doberman",
     "eigen",
     "Gahlord",
-    "Helen_G",
+    "Gordey_Chernyy",
+    "Helen",
     "infinitedigits",
     "jaseknighter",
     "jatwo",
@@ -44,7 +45,7 @@ function credits:open()
   print("PROUDLY PRESENT")
   self:divider()
   print("CORAL CARRIER INCARNADINE")
-  print("v" .. version .. " " .. cci.hash)
+  print("v" .. cci.version .. " " .. cci.hash)
   print()
   print("         o.               O               O     ")
   print("    O   .#@##  O     o   °#@##  O   #OOOO##@   #")
