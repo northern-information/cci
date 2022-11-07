@@ -49,20 +49,24 @@ function events:load_all()
       controller:clear_menu()
       controller:add_menu_item{
         id = 1,
-        name = "SIFT",
-        action = function()
-          queue:jump("sift")
-        end,
+        name = "MYCOCHAIN",
+        action = function() queue:jump("mycochain") end,
         change = function() return end
       }
       controller:add_menu_item{
         id = 2,
+        name = "SIFT",
+        action = function() queue:jump("sift") end,
+        change = function() return end
+      }
+      controller:add_menu_item{
+        id = 3,
         name = "ITEMS",
         action = function() queue:jump("items") end,
         change = function() return end
       }
       controller:add_menu_item{
-        id = 3,
+        id = 4,
         name = "EXIT",
         action = function() queue:jump("exit") end,
         change = function() return end
@@ -79,7 +83,8 @@ function events:load_all()
   self:register{name = "title_owl",                   duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_owl() end }
   self:register{name = "title_proudly_present",       duration = 30, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_proudly_present() end }
   self:register{name = "title_card",                  duration = 50, action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:title_card() end }
-  self:register{name = "items",                       duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:inventory() return end }
+  self:register{name = "mycochain",                   duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:mycochain() return end }
+  self:register{name = "items",                       duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:inventory() return end }  
   self:register{name = "sift",                        duration = 0,  action = function() return end,    change = function() return end, on_arrive = function() return end, on_leave = function() return end, render = function() graphics:sift() return end }
   self:register{name = "exit",                        duration = 0,  action = function() fn.exit() end, change = function() return end, on_arrive = function() sampler:linear_fade_out("/music-title.wav", 2) end, on_leave = function() return end, render = function() return end }
 

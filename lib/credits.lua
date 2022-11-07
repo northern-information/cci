@@ -4,6 +4,7 @@ credits = {}
 
 function credits.init()
   credits.contributors = {
+    "argotechnica",
     "branch",
     "Cementimental",
     "casualdecay",
@@ -19,6 +20,7 @@ function credits.init()
     "juje",
     "Justmat",
     "license",
+    "McNUG",
     "Obakegaku",
     "pleco",
     "radioedit",
@@ -27,6 +29,7 @@ function credits.init()
     "Tyler",
     "tyleretters",
     "Ukasz",
+    "vehka",
     "wheelersounds"
   }
 end

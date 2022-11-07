@@ -34,7 +34,7 @@ function items:load_all()
   self:register{name = "Ceph",                  lsystem_id = nil, rarity = "M", type = "C", burden = 0,         png = "item-ceph",                 description = "No description."}
   self:register{name = "Floater",               lsystem_id = nil, rarity = "C", type = "C", burden = 0,         png = "item-floater",              description = "No description."}
   self:register{name = "Glass Eye",             lsystem_id = nil, rarity = "R", type = "C", burden = 0,         png = "item-glass-eye",            description = "No description."}
-  self:register{name = "Gold Bell (750g)",      lsystem_id = nil, rarity = "M", type = "C", burden = 13,        png = "item-none",                 description = "Shrouded in an enthralling glow, you’re not sure what will happen when you ring it."}
+  self:register{name = "Gold Bell (750g)",      lsystem_id = nil, rarity = "M", type = "C", burden = 13,        png = "item-none",                 description = "Shrouded in an enthralling glow, you're not sure what will happen when you ring it."}
   self:register{name = "Ideonella sakaiensis",  lsystem_id = nil, rarity = "U", type = "C", burden = 0.1,       png = "item-ideonella-sakaiensis", description = "Tank containing an infusion of plastic digesting microbes."}
   self:register{name = "Lunar Cap",             lsystem_id = nil, rarity = "U", type = "C", burden = 0.1,       png = "item-lunar-cap",            description = "Grown on the moon. Restores macrophage."}
   self:register{name = "Meshmel (1kg)",         lssytem_id = nil, rarity = "C", type = "C", burden = 0.001,     png = "item-meshmel",              description = "A large leafy vegetable that provides sustenance, heavy in cadmium and potassium. "}
@@ -48,6 +48,6 @@ function items:load_all()
   self:register{name = "Slime Mould Alpha",     lsystem_id = nil, rarity = "M", type = "C", burden = 0.1,       png = "item-slime-mould-alpha",    description = "Neuro-Mycelial interface, connection logic, pattern synthesis."}
   self:register{name = "Slime Mould Beta",      lsystem_id = nil, rarity = "M", type = "C", burden = 0.1,       png = "item-slime-mould-beta",     description = "Neuro-Mycelial interface, connection logic, pattern synthesis."}
   self:register{name = "Slime Mould Delta",     lsystem_id = nil, rarity = "M", type = "C", burden = 0.1,       png = "item-slime-mould-delta",    description = "Neuro-Mycelial interface, connection logic, pattern synthesis."}
-  self:register{name = "Waterproof Map (10g)",  lsystem_id = nil, rarity = "U", type = "C", burden = 1,         png = "item-none",                 description = "The maps seems to depict constellations, but they don’t look similar to anything you've seen in the sky. Perhaps they're mycelial."}
+  self:register{name = "Waterproof Map (10g)",  lsystem_id = nil, rarity = "U", type = "C", burden = 1,         png = "item-none",                 description = "The maps seems to depict constellations, but they don't look similar to anything you've seen in the sky. Perhaps they're mycelial."}
   self:register{name = "Whale Soul",            lsystem_id = nil, rarity = "M", type = "C", burden = 0,         png = "item-whale-soul",           description = "Aetheric whale consciousness."}
 end

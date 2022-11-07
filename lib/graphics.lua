@@ -20,6 +20,16 @@ function graphics.init()
   for i=1, 64 do graphics.title_northern_information_splash_lines_close_available[i] = i end
 end
 
+function graphics:mycochain()
+  screen.aa(0)
+  local l = lore.all[lore.selected]
+  screen.display_png(graphics.png_prefix .. l.png .. ".png", 0, 0) 
+  self:text(65, 6, l.name, 15)
+  local message = l.online and "ONLINE" or "OFFLINE"
+  self:text(65, 14, message, 15)
+end
+
+
 -- todo: refactor to use the ni graphic lib
 function graphics:sift()
   screen.aa(1)

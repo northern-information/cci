@@ -42,6 +42,9 @@ function controller:enter()
   if queue.current.name == "items" then
     sampler:play_oneshot("ui-no.wav")
   end
+  if queue.current.name == "mycochain" then
+    sampler:play_oneshot("ui-no.wav")
+  end
   fn.set_screen_dirty(true)
 end
 
@@ -57,6 +60,9 @@ function controller:down()
     uref.scroll_page(distance)
   end
   if queue.current.name == "items" then
+    sampler:play_oneshot("ui-no.wav")
+  end
+  if queue.current.name == "mycochain" then
     sampler:play_oneshot("ui-no.wav")
   end
   fn.set_screen_dirty(true)
@@ -76,6 +82,9 @@ function controller:up()
   if queue.current.name == "items" then
     sampler:play_oneshot("ui-no.wav")
   end
+  if queue.current.name == "mycochain" then
+    sampler:play_oneshot("ui-no.wav")
+  end
   fn.set_screen_dirty(true)
 end
 
@@ -91,6 +100,10 @@ function controller:right()
     sampler:play_oneshot("ui-up.wav")
     items:next()
   end
+  if queue.current.name == "mycochain" then
+    sampler:play_oneshot("ui-up.wav")
+    lore:next()
+  end
   fn.set_screen_dirty(true)
 end
 
@@ -105,6 +118,10 @@ function controller:left()
   if queue.current.name == "items" then
     sampler:play_oneshot("ui-down.wav")
     items:previous()
+  end
+  if queue.current.name == "mycochain" then
+    sampler:play_oneshot("ui-down.wav")
+    lore:previous()
   end
   fn.set_screen_dirty(true)
 end

@@ -8,7 +8,7 @@
 -- https://cci.dev
 
 cci = {}
-cci.version = "0.0.11"
+cci.version = "0.0.12"
 engine.name = "CCI"
 tabutil = require "tabutil"
 params:set("compressor", 1)
@@ -21,6 +21,7 @@ include "cci/lib/fn"
 include "cci/lib/graphics"
 include "cci/lib/hid_controller"
 include "cci/lib/items"
+include "cci/lib/lore"
 include "cci/lib/lsys/includes"
 include "cci/lib/queue"
 include "cci/lib/sampler"
@@ -40,6 +41,7 @@ function init()
   graphics.init()
   hid_controller.init()
   items.init()
+  lore.init()
   queue.init()
   script.init()
   uref.init()
