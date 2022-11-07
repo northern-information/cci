@@ -1,6 +1,6 @@
--- 0x002: MAIDéNFALL...
--- 0x000: SALVAGé MODé éNABLé
--- 0x032: éncs offline kéys null
+-- 0x002: MAIDENFALL...
+-- 0x000: SALVAGE MODE ON
+-- 0x032: HARD UI OFFLINE
 -- ANSI/ISO Keyboard Required
 -- See: System > Devices > HID
 -- HECATOMB Mod Recommended
@@ -8,7 +8,7 @@
 -- https://cci.dev
 
 cci = {}
-cci.version = "0.0.10"
+cci.version = "0.0.11"
 engine.name = "CCI"
 tabutil = require "tabutil"
 params:set("compressor", 1)
