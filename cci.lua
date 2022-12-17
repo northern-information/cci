@@ -8,7 +8,7 @@
 -- https://cci.dev
 
 cci = {}
-cci.version = "0.0.12"
+cci.version = "0.0.13"
 engine.name = "CCI"
 tabutil = require "tabutil"
 params:set("compressor", 1)
